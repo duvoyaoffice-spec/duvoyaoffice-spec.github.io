@@ -1,0 +1,41 @@
+{
+  "id": "/",
+  "name": "DUVOYA · דּוּווֹיָה",
+  "short_name": "DUVOYA",
+  "description": "רשת בוטיק למסעות: מוצאים שותפים לאותו יעד ולאותה רמת תקציב, מאשרים הדדית, מחליטים יחד — ומזמינים מלון מדויק לבקשה. חינם, מגיל 18.",
+  "lang": "he",
+  "dir": "rtl",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAF7F2",
+  "theme_color": "#F4EEE4",
+  "categories": ["travel", "social", "lifestyle"],
+  "icons": [
+    { "src": "/icons/duvoya-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/duvoya-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/duvoya-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    {
+      "name": "ההתאמות שלי",
+      "short_name": "התאמות",
+      "url": "/?tab=deck",
+      "icons": [{ "src": "/icons/duvoya-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "מדריך היעדים",
+      "short_name": "יעדים",
+      "url": "/?tab=destinations",
+      "icons": [{ "src": "/icons/duvoya-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "הקונסיירז׳",
+      "short_name": "קונסיירז׳",
+      "url": "/?tab=concierge",
+      "icons": [{ "src": "/icons/duvoya-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

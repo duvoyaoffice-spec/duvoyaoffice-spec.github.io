@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+# The owner tools screen is not for search engines.
+Disallow: /*tab=admin
+
+Sitemap: https://duvoyaoffice-spec.github.io/sitemap.xml
