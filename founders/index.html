@@ -207,7 +207,7 @@ footer nav a{min-height:44px;display:inline-flex;align-items:center}
       <li><b>מה נאסף:</b> שם, יעד, חודש מועדף ורמת תקציב, טלפון (רק אם מסרתם), ההסכמה לעדכונים (רק אם סימנתם), ומאיזה קישור הגעתם לדף (למשל מאינסטגרם).</li>
       <li><b>למה:</b> כדי לעדכן אתכם כשהאפליקציה תיפתח ביעד שבחרתם, ולהחליט לאילו יעדים לפתוח קודם. עדכונים שיווקיים בוואטסאפ או ב־SMS — רק אם סימנתם את התיבה, ואפשר לבטל בכל עת.</li>
       <li><b>חובה?</b> אין חובה חוקית למסור את הפרטים. בלי שם ויעד לא נוכל לרשום אתכם.</li>
-      <li><b>איפה נשמר:</b> הפרטים נשלחים אלינו בהודעה פרטית באינסטגרם או בפייסבוק (שירותים של Meta), או במייל לתיבת הדואר של הצוות (שירות Gmail של Google), ונשמרים שם. הם לא יימסרו לאחרים, מלבד ספקים שמפעילים עבורנו את השירות.</li>
+      <li><b>איפה נשמר:</b> הפרטים נשלחים מהמייל שלכם לתיבת הדואר של הצוות (שירות Gmail של Google), או בהודעה פרטית באינסטגרם או בפייסבוק (שירותים של Meta), ונשמרים שם. הם לא יימסרו לאחרים, מלבד ספקים שמפעילים עבורנו את השירות.</li>
       <li><b>הזכויות שלכם:</b> לעיין בפרטים, לתקן אותם ולבקש מחיקה בכל עת — בתשובה להודעה או למייל.</li>
       <li><b>בדפדפן:</b> הדף שומר בדפדפן שלכם רק את היעד שבחרתם ואת מועד השליחה, כדי להראות לכם שכבר התחלתם להירשם. בלי עוגיות ובלי כלי מדידה. הגופנים נטענים מ־Google Fonts והתמונות מ־Unsplash — שירותים שמקבלים את כתובת ה־IP של הדפדפן, כמו בכל טעינת אתר.</li>
     </ul>
@@ -230,8 +230,8 @@ footer nav a{min-height:44px;display:inline-flex;align-items:center}
 <script>
 (function(){
   // Submit mechanism: a ready-made email (mailto) to the TEAM address. Never a personal address.
-  // Leave empty until the team mailbox exists — the page then says honestly that sign-up opens soon.
-  var TO = '';
+  // When empty, the page prepares a message to copy into a private message instead of opening an email.
+  var TO = 'duvoya.office@gmail.com';
   var KEY = 'voy.waitlist';
   var $ = function(id){ return document.getElementById(id); };
   var form = $('wlForm'), sel = $('wl_dest'), err = $('wlErr'), status = $('wlStatus');
@@ -282,10 +282,11 @@ footer nav a{min-height:44px;display:inline-flex;align-items:center}
     if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(s).then(function(){ return true; }, function(){ return false; });
     return Promise.resolve(false);
   }
-  function showMessage(body){
-    show('הפרטים מוכנים — נשאר רק לשלוח אותם.', ' ');
+  var DM_STEPS = ['חזרו לפרופיל של DUVOYA באינסטגרם (או לעמוד בפייסבוק) ולחצו ״הודעה״.', 'הדביקו את ההודעה שלמטה ושלחו. ההרשמה נשלמת כשההודעה נשלחת, ונענה לכם שם.'];
+  function showMessage(body, title, steps){
+    show(title || 'הפרטים מוכנים — נשאר רק לשלוח אותם.', ' ');
     var ol = document.createElement('ol'); ol.className = 'steps-dm';
-    ['חזרו לפרופיל של DUVOYA באינסטגרם (או לעמוד בפייסבוק) ולחצו ״הודעה״.', 'הדביקו את ההודעה שלמטה ושלחו. ההרשמה נשלמת כשההודעה נשלחת, ונענה לכם שם.'].forEach(function(s){ var li = document.createElement('li'); li.textContent = s; ol.appendChild(li); });
+    (steps || DM_STEPS).forEach(function(s){ var li = document.createElement('li'); li.textContent = s; ol.appendChild(li); });
     status.appendChild(ol);
     var ta = document.createElement('textarea'); ta.readOnly = true; ta.value = body; ta.setAttribute('aria-label', 'ההודעה המוכנה לשליחה'); status.appendChild(ta);
     var btn = document.createElement('button'); btn.type = 'button'; btn.className = 'cp'; btn.textContent = 'העתקת ההודעה';
@@ -322,7 +323,11 @@ footer nav a{min-height:44px;display:inline-flex;align-items:center}
     }
     try { localStorage.setItem(KEY, JSON.stringify({ d: d, t: Date.now() })); } catch (e2) {}
     // honest status: nothing is saved until the email is actually sent
-    show('נפתחה אצלכם הודעת מייל מוכנה.', 'ההרשמה תושלם כשתשלחו אותה. לא נפתחה הודעה? אפשר ללחוץ שוב, או לכתוב לנו הודעה בעמוד של DUVOYA באינסטגרם או בפייסבוק.');
+    // the ready message stays on screen as a fallback (in-app browsers often cannot open a mail app)
+    showMessage(body, 'נפתחה אצלכם הודעת מייל מוכנה — נשאר רק לשלוח אותה.', [
+      'ההרשמה נשלמת כשהמייל נשלח, ונענה לכם בתשובה אליו.',
+      'לא נפתחה הודעת מייל? העתיקו את ההודעה שלמטה ושלחו אותה אל ' + TO + ', או בהודעה פרטית לעמוד של DUVOYA באינסטגרם או בפייסבוק.'
+    ]);
     location.href = mailto('הרשמה לרשימת ההמתנה — ' + d, body);
   });
 
