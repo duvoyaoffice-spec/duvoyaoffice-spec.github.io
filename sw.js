@@ -4,10 +4,10 @@
 //   • Built files (/assets/…, hashed): cache first — they never change under the same name.
 //   • Google Fonts: stale-while-revalidate, so the typography survives offline.
 //   • Everything else — the Supabase API, realtime, partner sites, photos — goes to the network untouched.
-const VERSION = '7ff577a74afe';
+const VERSION = '6af67048dd66';
 const SHELL = 'duvoya-shell-' + VERSION;
 const FONTS = 'duvoya-fonts-v1';
-const PRECACHE = ["/","/apple-touch-icon.png","/assets/accessibility-B6OrJ8Td.js","/assets/affiliate-K5qnwbNf.js","/assets/ai-concierge-DCU61lJP.js","/assets/community-Bvf4vxaX.js","/assets/cookies-CdXDlfKW.js","/assets/core-Cdkqe2Bh.js","/assets/index-B8txFtdb.js","/assets/index-COZDRBUk.css","/assets/privacy-BXq6mb-o.js","/assets/react-DQC8vhiG.js","/assets/terms-BT9A-E7O.js","/favicon.png","/favicon.svg","/frame-guard.js","/icons/duvoya-192.png","/icons/duvoya-512.png","/manifest.webmanifest"];
+const PRECACHE = ["/","/apple-touch-icon.png","/assets/accessibility-B6OrJ8Td.js","/assets/affiliate-K5qnwbNf.js","/assets/ai-concierge-DCU61lJP.js","/assets/community-Bvf4vxaX.js","/assets/cookies-CdXDlfKW.js","/assets/core-Cdkqe2Bh.js","/assets/index-BbcLVh4B.js","/assets/index-COZDRBUk.css","/assets/privacy-BXq6mb-o.js","/assets/react-DQC8vhiG.js","/assets/terms-BT9A-E7O.js","/favicon.png","/favicon.svg","/frame-guard.js","/icons/duvoya-192.png","/icons/duvoya-512.png","/manifest.webmanifest"];
 
 self.addEventListener('install', event => {
   event.waitUntil(
